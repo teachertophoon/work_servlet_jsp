@@ -2,11 +2,16 @@ package com.koitt.board.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.koitt.board.model.Command;
+import com.koitt.board.model.ListCommand;
 
 public class BoardServlet extends HttpServlet {
 	
@@ -35,9 +40,29 @@ public class BoardServlet extends HttpServlet {
 			}
 			
 			// cmd 값에 따라 분기처리
-			String page = null;		// 포워딩할 JSP 페이지 명
+			String page = null;			// 포워딩할 JSP 페이지 명
+			Command command = null;		// 비지니스 로직을 처리할 Model 객체
+			
+			switch (cmd) {
+				case "CMD_LIST":
+					command = new ListCommand();
+					page = command.execute(req, resp);
+					break;
+			}
+			
+			// JSP 페이지로 서블릿에서 setAttribute한 내용을 포워딩
+			RequestDispatcher rd = req.getRequestDispatcher(page);
+			rd.forward(req, resp);
 			
 		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
