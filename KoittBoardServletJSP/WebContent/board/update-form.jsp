@@ -10,13 +10,12 @@
 	<!-- HTTP Method 중 post 방식으로 BoardServlet에 정보를 전달 (쿼리문자열을 사용할 수 없음) -->
 	<form action="<c:url value='/BoardServlet' />" method="post">
 		<input type="hidden" name="cmd" value="CMD_UPDATE">
+		<input type="hidden" name="no" value="${ requestScope.board.no }">
 		<div>번호 : ${ requestScope.board.no }</div>
 		<label>제목 : <input type="text" name="title" value="${ requestScope.board.title }"></label><br>
 		<div>작성자 : ${ requestScope.board.writer }</div><br>
 		<label>내용 : </label>
-		<textarea rows="3" cols="50" name="content">
-			${ requestScope.board.content }
-		</textarea>
+		<textarea rows="3" cols="50" name="content">${ requestScope.board.content }</textarea>
 		<br>
 		<input type="submit" value="글 수정">
 	</form>
