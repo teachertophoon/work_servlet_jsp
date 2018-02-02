@@ -113,6 +113,29 @@ public class BoardDao {
 		// 7. 생략
 	}
 	
+	// 글 삭제
+	public void delete(Integer no) throws ClassNotFoundException, SQLException {
+		// 1. 데이터베이스 커넥션 객체 가져오기
+		Connection conn = DBUtil.getInstance().getConnection();
+		
+		// 2. SQL문 작성
+		String sql = "DELETE FROM board WHERE no = ?";
+		
+		// 3. PreparedStatement 객체 생성 및 물음표 채우기
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, no);
+		
+		// 4. SQL문 실행
+		pstmt.executeUpdate();
+		
+		// 5. 생략
+		
+		// 6. 객체 해제
+		DBUtil.getInstance().close(pstmt);
+		DBUtil.getInstance().close(conn);
+		
+		// 7. 생략
+	}
 }
 
 
