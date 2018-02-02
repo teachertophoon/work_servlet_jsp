@@ -32,7 +32,7 @@
 	<a href="<c:url value='/board/delete-confirm.jsp?no=${ requestScope.board.no }' />">
 		삭제하기
 	</a>
-	<a href="<c:url value='/BoardServlet?cmd=CMD_UPDATE_FORM?no=${ requestScope.board.no }'/>">
+	<a href="<c:url value='/BoardServlet?cmd=CMD_UPDATE_FORM&no=${ requestScope.board.no }'/>">
 		수정하기
 	</a>
 </body>

@@ -14,6 +14,7 @@ import com.koitt.board.model.Command;
 import com.koitt.board.model.DeleteCommand;
 import com.koitt.board.model.InsertCommand;
 import com.koitt.board.model.ListCommand;
+import com.koitt.board.model.UpdateFormCommand;
 import com.koitt.board.model.ViewCommand;
 
 public class BoardServlet extends HttpServlet {
@@ -64,6 +65,11 @@ public class BoardServlet extends HttpServlet {
 					
 				case "CMD_DELETE":
 					command = new DeleteCommand();
+					page = command.execute(req, resp);
+					break;
+					
+				case "CMD_UPDATE_FORM":
+					command = new UpdateFormCommand();
 					page = command.execute(req, resp);
 					break;
 			}
