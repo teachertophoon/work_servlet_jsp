@@ -20,7 +20,13 @@ public class JoinCommand implements Command {
 		// 2. 클라이언트로부터 전달받은 값을 변수에 저장
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		String passwordConfirm = req.getParameter("password-confirm");
 		String name = req.getParameter("name");
+		
+		// 만약 패스워드와 패스워드 확인 값이 다르면 쿼리문자열 사용해서 오류처리
+		if (!password.equals(passwordConfirm)) {
+			return "./users/join-form.jsp?error=password";
+		}
 		
 		// 3. insert로 전달할 Users 객체 생성
 		Users users = new Users();
