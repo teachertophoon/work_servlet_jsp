@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.koitt.board.model.Command;
+import com.koitt.board.model.users.JoinCommand;
 import com.koitt.board.model.users.ListCommand;
 
 public class UsersServlet extends HttpServlet {
@@ -45,6 +46,11 @@ public class UsersServlet extends HttpServlet {
 			switch (cmd) {
 				case "CMD_LIST":
 					command = new ListCommand();
+					page = command.execute(req, resp);
+					break;
+					
+				case "CMD_JOIN":
+					command = new JoinCommand();
 					page = command.execute(req, resp);
 					break;
 			}

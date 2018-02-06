@@ -37,4 +37,29 @@ public class UsersDao {
 		
 		return list;
 	}
+	
+	public void insert(Users users) throws ClassNotFoundException, SQLException {
+		Connection conn = DBUtil.getInstance().getConnection();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO users (email, password, name) ");
+		sql.append("VALUES (?, ?, ?)");
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		
+		pstmt.setString(1, users.getEmail());
+		pstmt.setString(2, users.getPassword());
+		pstmt.setString(3, users.getName());
+		pstmt.executeUpdate();
+		
+		DBUtil.getInstance().close(pstmt);
+		DBUtil.getInstance().close(conn);
+	}
 }
+
+
+
+
+
+
+
