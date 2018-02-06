@@ -40,6 +40,7 @@
 	<filter-mapping>
 		<filter-name>loginCheckFilter</filter-name>
 		<url-pattern>/board/*</url-pattern>
+		<url-pattern>/BoardServlet/*</url-pattern>
 	</filter-mapping>
 	
 </web-app>
