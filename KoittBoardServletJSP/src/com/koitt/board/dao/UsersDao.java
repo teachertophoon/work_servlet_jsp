@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.koitt.board.util.DBUtil;
 import com.koitt.board.vo.Users;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class UsersDao {
 	
@@ -38,7 +39,7 @@ public class UsersDao {
 		return list;
 	}
 	
-	public void insert(Users users) throws ClassNotFoundException, SQLException {
+	public void insert(Users users) throws ClassNotFoundException, SQLException, MySQLIntegrityConstraintViolationException {
 		Connection conn = DBUtil.getInstance().getConnection();
 		
 		StringBuilder sql = new StringBuilder();

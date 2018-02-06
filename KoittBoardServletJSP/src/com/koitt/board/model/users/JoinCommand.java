@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.koitt.board.dao.UsersDao;
 import com.koitt.board.model.Command;
 import com.koitt.board.vo.Users;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class JoinCommand implements Command {
 
@@ -40,7 +41,11 @@ public class JoinCommand implements Command {
 		UsersDao dao = new UsersDao();
 		
 		// 6. INSERT SQL문 실행을 하는 UsersDao의 insert 메소드로 4번 Users 객체 전달
-		dao.insert(users);
+		try {
+			dao.insert(users);
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			return "./users/join-form.jsp?error=email";
+		}
 		
 		// 7. 포워딩 할 JSP 페이지를 UsersServlet(Controller)로 전달
 		return page;
