@@ -15,4 +15,19 @@
 		<servlet-name>BoardServlet</servlet-name>
 		<url-pattern>/BoardServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UsersServlet</servlet-name>
+		<servlet-class>com.koitt.board.controller.UsersServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UsersServlet</servlet-name>
+		<url-pattern>/UsersServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
+
+
+
+
+
