@@ -70,7 +70,7 @@ public class BoardDao {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT b.no, b.title, b.content, u.email, b.regdate ");
 		sql.append("FROM board b, users u ");
-		sql.append("WHERE b.user_no = u.no AND b.no = ?");
+		sql.append("WHERE b.user_no = u.no AND b.no = ? ");
 		sql.append("ORDER BY b.no DESC");
 		
 		// 3. PreparedStatement 객체 생성 및 물음표 채우기
@@ -119,30 +119,16 @@ public class BoardDao {
 		// 1. 데이터베이스 커넥션 객체 가져오기
 		Connection conn = DBUtil.getInstance().getConnection();
 		
-		// 2. SQL문 작성 (email에 해당하는 사용자의 번호를 가져온다.)
-		String sql = "SELECT no FROM users WHERE email = ?";
-		
-		// 3. PreparedStatement 객체 생성 및 물음표 채우기
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, board.getUsers().getEmail());
-		
-		// 4. SQL문 실행
-		ResultSet rs = pstmt.executeQuery();
-		rs.next();
-		
-		// 5. email에 해당하는 사용자의 번호를 가져와서 변수에 저장
-		Integer userNo = rs.getInt("user_no");
-		
 		// 2. SQL문 작성 (글 번호 내림차순 정렬, 최신글 우선)
 		StringBuilder sql02 = new StringBuilder();
 		sql02.append("INSERT INTO board (title, content, user_no, regdate) ");
 		sql02.append("VALUES (?, ?, ?, CURDATE())");	// CURDATE(): MySQL에서 제공하는 함수
 		
 		// 3. PreparedStatement 객체 생성 및 물음표 채우기
-		pstmt = conn.prepareStatement(sql02.toString());
+		PreparedStatement pstmt = conn.prepareStatement(sql02.toString());
 		pstmt.setString(1, board.getTitle());
 		pstmt.setString(2, board.getContent());
-		pstmt.setInt(3, userNo);
+		pstmt.setInt(3, board.getUserNo());
 		
 		// 4. SQL문 실행
 		pstmt.executeUpdate();
